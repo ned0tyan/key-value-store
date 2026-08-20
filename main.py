@@ -3,22 +3,27 @@ def main():
 
     while True:
         user_input = input('> ')
+        parts = user_input.split()
+        if not parts:
+            continue
 
-        if user_input.lower() == 'exit':
+        command = parts[0].lower()
+
+        if command == 'exit':
             break
-        elif user_input.split()[0].lower() == 'set':
-            if len(user_input.split()) < 3:
+        elif command == 'set':
+            if len(parts) < 3:
                 print('Invalid command. Use "set <key> <value>".')
                 continue
-            
-            key, value = user_input.split()[1], user_input.split()[2]
+
+            key, value = parts[1], parts[2]
             storage[key] = value
-        elif user_input.split()[0].lower() == 'get':
-            if len(user_input.split()) < 2:
+        elif command == 'get':
+            if len(parts) < 2:
                 print('Invalid command. Use "get <key>".')
                 continue
 
-            key = user_input.split()[1]
+            key = parts[1]
             print(storage.get(key, 'Key not found'))
         else:
             print('Invalid command. Use "set <key> <value>" or "get <key>".')
