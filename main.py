@@ -45,8 +45,40 @@ def main():
             key = parts[1]
             print(storage.get(key, 'Key not found'))
 
+        elif command == 'del':
+            if len(parts) < 2:
+                print('Invalid command. Use "del <key>".')
+                continue
+
+            key = parts[1]
+            if key in storage:
+                del storage[key]
+                save_db(storage)
+                print('OK')
+            else:
+                print('Key not found')
+
+        elif command == 'exists':
+            if len(parts) < 2:
+                print('Invalid command. Use "exists <key>"')
+                continue
+
+            key = parts[1]
+            print(int(key in storage))
+
+        elif command == 'all':
+            if len(parts) > 1:
+                print('Invalid command. Use "all"')
+                continue
+
+            if not storage:
+                print("(empty)")
+            else:
+                for key, value in storage.items():
+                    print(f'{key}: {value}')
+        
         else:
-            print('Invalid command. Use "set <key> <value>" or "get <key>".')
+            print('Invalid command. Use "set", "get", "all", "del", "exists"')
 
 if __name__ == '__main__':
     main()
