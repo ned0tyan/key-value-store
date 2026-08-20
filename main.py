@@ -19,7 +19,7 @@ def main():
 
     while True:
         user_input = input('> ')
-        parts = user_input.split()
+        parts = user_input.split(maxsplit=2)
         if not parts:
             continue
 
